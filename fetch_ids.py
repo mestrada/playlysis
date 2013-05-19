@@ -8,6 +8,7 @@ __version__ = "0.1"
 import sys
 import json
 import logging
+import datetime
 
 import pymongo
 
@@ -19,7 +20,6 @@ FORMAT = '%(asctime)-15s - %(levelname)s - %(message)s'
 logging.basicConfig(format=FORMAT)
 
 flhdl = logging.FileHandler('log/fetch_ids.log')
-ch = logging.StreamHandler(sys.stdout)
 
 logger = logging.getLogger('GooglePlay')
 logger.setLevel(logging.DEBUG)
@@ -84,6 +84,7 @@ for sub in SUB_CAT:
                     ))
 
                 to_insert = obj_to_dict(c)
+                to_insert.update({"dt": datetime.datetime.utcnow()})
 
                 db.apps.save(to_insert)
 
