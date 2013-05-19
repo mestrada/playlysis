@@ -62,10 +62,15 @@ def get_update_notes(aid='com.skout.android', lang='en'):
 if __name__ == '__main__':
 
     count = 0
+    inserted = 0
     duplicated = 0
+    progress_index = 1
+    n_apps = db.apps.count()
+
+    logger.info("Progress 0 %  of {} apps".format(n_apps))
 
     for app in db.apps.find():
-
+        count += 1
         # Wait a random time
         wait(logger)
 
@@ -89,15 +94,18 @@ if __name__ == '__main__':
 
             logger.debug("Updates notes for {} inserted".format(app['appid']))
 
-            count += 1
+            inserted += 1
         except pymongo.errors.DuplicateKeyError:
             logger.debug("Duplicate key {}".format(app['appid']))
             duplicated += 1
         except Exception:
             raise
+        if count == int(progress_index * 0.10 * n_apps):
+            logger.info("Progress {} %  of {} apps".format(float(count) / n_apps, n_apps))
+            progress_index += 1
 
     logger.info(
         "{} update notes inserted {} duplicated."
-        .format(count, duplicated))
+        .format(inserted, duplicated))
 
     logger.info("Process finished")
