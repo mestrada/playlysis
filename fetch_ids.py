@@ -58,6 +58,7 @@ SUB_CAT = (
 )
 
 count = 0
+duplicated = 0
 offset = 100
 logger.info('Using offset {}'.format(offset))
 
@@ -85,22 +86,23 @@ for sub in SUB_CAT:
 
                 to_insert = obj_to_dict(c)
                 to_insert.update({"dt": datetime.datetime.utcnow()})
+                try:
+                    db.apps.save(to_insert)
+                    count += 1
 
-                db.apps.save(to_insert)
-
-                logger.debug(
-                    'Inserted {}'.format(
-                        c.docid,
-                    ))
-                count += 1
-
+                    logger.debug(
+                        'Inserted {}'.format(
+                            c.docid,
+                        ))
+                except pymongo.errors.DuplicateKeyError:
+                    duplicated += 1
+                    logger.debug("Duplicate key {}".format(c.docid))
         except DecodeError:
             break
-        except pymongo.errors.DuplicateKeyError:
-            logger.debug("Duplicate key {}".format(c.docid))
-            pass
         except Exception:
             raise
         index += 1
 
-logger.info("Fetch process finished. New inserted ids: {}".format(count))
+logger.info(
+    "Fetch process finished. {} inserted ids and {} duplicated."
+    .format(count, duplicated))
