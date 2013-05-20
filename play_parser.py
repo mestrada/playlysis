@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     logger.info("Progress 0 %  of {} apps".format(n_apps))
 
-    for app in db.apps.find():
+    for app in db.apps.find().sort("_id", pymongo.DESCENDING):
         count += 1
         # Wait a random time
         wait(logger)
@@ -78,8 +78,11 @@ if __name__ == '__main__':
             "Getting updates for {}"
             .format(app['appid'])
         )
-
-        u, v, p = get_update_notes(app['appid'])
+        try:
+            u, v, p = get_update_notes(app['appid'])
+        except IndexError:
+            logger.critical("Updates for {} not found".format(app['appid']))
+            continue
 
         try:
             db.updates.save({
@@ -101,7 +104,7 @@ if __name__ == '__main__':
         except Exception:
             raise
         if count == int(progress_index * 0.10 * n_apps):
-            logger.info("Progress {} %  of {} apps".format(float(count) / n_apps, n_apps))
+            logger.info("Progress {} %  of {} apps".format(100 * (float(count) / n_apps), n_apps))
             progress_index += 1
 
     logger.info(
