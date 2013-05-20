@@ -14,42 +14,42 @@
 We are using MongoDB for storage.
 ## Collections
 * apps: This collections stores the application's IDs.
-	```js
-	{
-		"_id" : ObjectId("51983e8c8c65f2e78e8c7e09"),
-		"appid" : "com.facebook.katana",
-		"details" : {
-			"appDetails" : {
-				"versionCode" : "204208",
-				"installationSize" : 18804498,
-				"numDownloads" : "100,000,000+",
-				"packageName" : "com.facebook.katana",
-				"uploadDate" : "May 17, 2013"
-			}
-		},
-		"detailsUrl" : "details?doc=com.facebook.katana",
-		"shareUrl" : "https://play.google.com/store/apps/details?id=com.facebook.katana",
-		"purchaseDetailsUrl" : "details?doc=com.facebook.katana",
-		"backendDocid" : "com.facebook.katana",
-		"docType" : 1,
-		"backendId" : 3,
-		"title" : "Facebook",
-		"creator" : "Facebook"
-	}
-	```
-* updates: This collections stores the update notes.
-	```js
+		```
 		{
-			"_id" : ObjectId("51982aa0a8d4f42d5253d80f"),
-			"uploaded" : "May 17, 2013",
-			"update_note" : "What's in this version:• Send stickers to make your messages more fun• Delete unwanted comments from your posts• Get directions, check in, call businesses and more right from the top of Facebook Pages",
+			"_id" : ObjectId("51983e8c8c65f2e78e8c7e09"),
 			"appid" : "com.facebook.katana",
-			"version" : "Varies with device",
-			"published" : "May 17, 2013",
-			"versionCode" : "204208",
-			"dt" : ISODate("2013-05-19T01:28:00.823Z")
+			"details" : {
+				"appDetails" : {
+					"versionCode" : "204208",
+					"installationSize" : 18804498,
+					"numDownloads" : "100,000,000+",
+					"packageName" : "com.facebook.katana",
+					"uploadDate" : "May 17, 2013"
+				}
+			},
+			"detailsUrl" : "details?doc=com.facebook.katana",
+			"shareUrl" : "https://play.google.com/store/apps/details?id=com.facebook.katana",
+			"purchaseDetailsUrl" : "details?doc=com.facebook.katana",
+			"backendDocid" : "com.facebook.katana",
+			"docType" : 1,
+			"backendId" : 3,
+			"title" : "Facebook",
+			"creator" : "Facebook"
 		}
-	```
+		```
+* updates: This collections stores the update notes.
+		```
+			{
+				"_id" : ObjectId("51982aa0a8d4f42d5253d80f"),
+				"uploaded" : "May 17, 2013",
+				"update_note" : "What's in this version:• Send stickers to make your messages more fun• Delete unwanted comments from your posts• Get directions, check in, call businesses and more right from the top of Facebook Pages",
+				"appid" : "com.facebook.katana",
+				"version" : "Varies with device",
+				"published" : "May 17, 2013",
+				"versionCode" : "204208",
+				"dt" : ISODate("2013-05-19T01:28:00.823Z")
+			}
+		```
 
 ## Indexes
 *appid index:
