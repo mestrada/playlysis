@@ -22,7 +22,7 @@ logging.basicConfig(format=FORMAT)
 flhdl = logging.FileHandler('log/fetch_ids.log')
 
 logger = logging.getLogger('GooglePlay')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 logger.addHandler(flhdl)
 
 try:

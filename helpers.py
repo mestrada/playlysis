@@ -90,7 +90,7 @@ def wait(logger=None):
     secs = float(2) / random.randint(1, 4)
 
     if logger:
-        logger.info("Waiting for {} seconds".format(secs))
+        logger.debug("Waiting for {} seconds".format(secs))
 
     time.sleep(secs)
 

@@ -22,7 +22,7 @@ logging.basicConfig(format=FORMAT)
 flhdl = logging.FileHandler('log/play_parser.log')
 
 logger = logging.getLogger('GPParser')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 logger.addHandler(flhdl)
 
 base_url = "https://play.google.com/store/apps/details"
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         # Wait a random time
         wait(logger)
 
-        logger.info(
+        logger.debug(
             "Getting updates for {}"
             .format(app['appid'])
         )
