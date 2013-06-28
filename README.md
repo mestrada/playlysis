@@ -9,6 +9,7 @@
 * [Requests](https://github.com/kennethreitz/requests)
 * [PyMongo](https://github.com/mongodb/mongo-python-driver)
 * [lxml](https://github.com/lxml/lxml/)
+* [pytagcloud](https://github.com/atizo/PyTagCloud)
 
 # Database
 We are using MongoDB for storage.
@@ -77,3 +78,11 @@ We are using MongoDB for storage.
 	.
 	.
 	.
+
+## Fetch update Notes
+	$ python playlysis.py
+	2013-05-20 13:53:35,225 - INFO - Conecting to host localhost:27017
+
+TODO Add logging and documentation to playlysis
+TODO Add a web interface
+
