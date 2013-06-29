@@ -10,6 +10,7 @@
 * [PyMongo](https://github.com/mongodb/mongo-python-driver)
 * [lxml](https://github.com/lxml/lxml/)
 * [pytagcloud](https://github.com/atizo/PyTagCloud)
+* [simplejson](https://github.com/simplejson/simplejson)
 
 # Database
 We are using MongoDB for storage.
@@ -81,8 +82,18 @@ We are using MongoDB for storage.
 
 ## Fetch update Notes
 	$ python playlysis.py
-	2013-05-20 13:53:35,225 - INFO - Conecting to host localhost:27017
+	2013-06-28 20:39:54,753 - INFO - Conecting to host localhost:27017
+	2013-06-28 20:39:54,761 - INFO - Progress 0 %  of 182 notes
+	2013-06-28 20:39:54,765 - INFO - Progress 9 %  of 182 notes
+	.
+	.
+	.
 
-TODO Add logging and documentation to playlysis
-TODO Add a web interface
+	2013-06-28 20:39:54,772 - INFO - Calculating tags
+	2013-06-28 20:39:56,792 - INFO - Generating cloud_large.png
+	2013-06-28 20:39:56,792 - INFO - File specs: h=900;w=600; max_tags=100; tag_max_size120
+	2013-06-28 20:39:58,044 - INFO - cloud_large.png succesfully created. Procces finished.
 
+# TODO 
+* Add logging and documentation to playlysis
+* Add a web interface
