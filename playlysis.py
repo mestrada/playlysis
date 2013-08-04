@@ -11,8 +11,10 @@ import StringIO
 
 import pymongo
 
+from helpers import get_n_word_tag_counts
+
 from pytagcloud import create_tag_image, make_tags
-from pytagcloud.lang.counter import get_tag_counts
+# from pytagcloud.lang.counter import get_tag_counts
 
 FORMAT = '%(asctime)-15s - %(levelname)s - %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -42,8 +44,9 @@ def get_notes(startdate, enddate):
 def get_tag_cloud(
     startdate,
     enddate,
+    n_words=1,
     max_tags=100,
-    max_size=120,
+    max_size=80,
     height=900,
     width=600,
     filename='cloud_large.png'
@@ -79,7 +82,7 @@ def get_tag_cloud(
 
         logger.info("Calculating tags")
         tags = make_tags(
-            get_tag_counts(mem_file.getvalue()),
+            get_n_word_tag_counts(mem_file.getvalue(), n_words),
             maxsize=max_size)
 
         logger.info("Generating {}".format(filename))

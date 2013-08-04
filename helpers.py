@@ -1,5 +1,11 @@
 import time
 import random
+import re
+import StringIO
+
+from operator import itemgetter
+
+from pytagcloud.lang.stopwords import StopWords
 
 def get_attr(obj, attr_list):
     attr = obj
@@ -109,3 +115,47 @@ def lookup(dictionary, key_stack, obj):
         for key in key_stack:
             attr = attr.__getattribute__(key)
         dictionary = attr
+
+
+def get_n_word_tag_counts(text, n):
+    """
+    Search tags in a given text. The language detection is based on stop lists.
+    This implementation is inspired by https://github.com/jdf/cue.language. Thanks Jonathan Feinberg.
+    """
+
+    regexp = r"[\w']+"
+
+    for _ in xrange(1, n):
+        regexp += r" [\w']+"
+
+    words = map(lambda x:x.lower(), re.findall(r"[\w']+", text, re.UNICODE))
+    
+    s = StopWords()
+    s.load_language(s.guess(words))
+    
+    aux_file = StringIO.StringIO()
+    
+    for word in words:
+        if s.is_stop_word(word):
+            words.remove(word)
+        else:
+            aux_file.write(word + ' ')
+
+    words = map(
+        lambda x:x.lower(),
+        re.findall(regexp, aux_file.getvalue(), re.UNICODE)
+        )
+
+    aux_file.flush()
+    aux_file.close()
+
+    counted = {}
+    
+    for word in words:
+        if not s.is_stop_word(word) and len(word) > 1:
+            if counted.has_key(word):
+                counted[word] += 1
+            else: 
+                counted[word] = 1
+      
+    return sorted(counted.iteritems(), key=itemgetter(1), reverse=True)
